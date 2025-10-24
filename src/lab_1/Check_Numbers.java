@@ -1,5 +1,4 @@
 package lab_1;
-
 public class Check_Numbers {
     public static void Check(int a, int b){
         if (b<a){               //Если a больше чем b меняем местами для удобства
