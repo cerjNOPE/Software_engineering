@@ -57,7 +57,6 @@ public class Books {
         return Objects.hash(title, author, publisher, genre, year);
     }
 
-
     //Для вывода в строку данных о книгах
     @Override
     public String toString() {

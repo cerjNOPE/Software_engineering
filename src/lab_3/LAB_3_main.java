@@ -13,11 +13,17 @@ public class LAB_3_main {
         //Добавление читателей
         library.addReader(new Readers("Сергей", "0001"));
         library.addReader(new Readers("Кирилл", "0002"));
+        library.addReader(new Readers("Иван", "0003"));
 
         //Выдача книг
         library.bookIssuance("0001", new Books("Преступление и наказание", "Ф. Достоевский", "Эксмо", "Роман", 1866));
         library.bookIssuance("0002", new Books("Преступление и наказание", "Ф. Достоевский", "Эксмо", "Роман", 1866));
         library.bookIssuance("0001", new Books("Преступление и наказание", "Ф. Достоевский", "Эксмо", "Роман", 1866));
+
+        //проверка выданных книг
+        library.showBorrowedBooks("0001");
+        //проверка выданных книг
+        library.showBorrowedBooks("0003");
 
         //Вывод всего каталога библиотеки
         library.showAllBooks();

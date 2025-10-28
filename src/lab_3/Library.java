@@ -57,25 +57,41 @@ public class Library {
         reader.put(Reader.getTicketNumber(), Reader);
     }
 
-    //Функция выдачи книги читателю (Выдает false при ошибке и true при успехе выдачи книги)
-    public boolean bookIssuance(String TicketNumber, Books Book) {
+    //Функция выдачи книги читателю
+    public void bookIssuance(String TicketNumber, Books Book) {
         Readers readers = reader.get(TicketNumber);
 
         if (reader == null) {
-            System.out.println("Читателя с таким номером читательского билета не существует!!!");
-            return false;
+            System.out.println("\nЧитателя с таким номером читательского билета не существует!!!");
+            return;
         }
 
         int amountBooks = book.getOrDefault(Book, 0);
         if (amountBooks <= 0) {
-            System.out.println("Книги не существует или отсутствует в наличии!!!");
-            return false;
+            System.out.println("\nКниги не существует или отсутствует в наличии!!!");
         } else {
             book.put(Book, amountBooks - 1);
             accountingOfBook.computeIfAbsent(readers, k -> new ArrayList<>()).add(Book);
-            System.out.println("Книга \"" + Book.getTitle() + "\" выдана " + readers.getName());
-            return true;
+            System.out.println("\nКнига \"" + Book.getTitle() + "\" выдана " + readers.getName());
         }
-
     }
+
+    //Вывод книг какие взял читатель по номеру его читательского билета
+    public void showBorrowedBooks(String ticketNumber) {
+        Readers readers = reader.get(ticketNumber);
+        if (readers == null) {
+            System.out.println("\nЧитатель с билетом №" + ticketNumber + " не найден!");
+            return;
+        }
+        List<Books> taken = accountingOfBook.get(readers);
+        if (taken == null || taken.isEmpty()) {
+            System.out.println("\n" + readers.getName() + " пока не взял ни одной книги.");
+        } else {
+            System.out.println("\nКниги, взятые читателем " + readers.getName() + ":");
+            for (Books book : taken) {
+                System.out.println(" - " + book);
+            }
+        }
+    }
+
 }
