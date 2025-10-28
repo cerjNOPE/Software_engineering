@@ -27,7 +27,7 @@ public class Library {
                 .collect(Collectors.toList());
     }
 
-    //Поиск книг по критерию переданному вместе с функцией (если не совпадает с критериями по умолчанию ищет по названию)
+    //Сортировка книг по критерию переданному вместе с функцией (если не совпадает с критериями по умолчанию Сортирует по названию)
     public List<Map.Entry<Books, Integer>> sortBy(String criterion) {
         Comparator<Books> comparator = switch (criterion.toLowerCase()) {
             case "название" -> Comparator.comparing(Books::getTitle);
